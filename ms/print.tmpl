@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CS@VT MS <% if {msthesis} %>Thesis<%else%>Coursework<%end%> Plan of Study</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="plan of study for CS graduate programs">
+	<meta name="author" content="benevolent dictator">
+
+	<!-- Le styles -->
+	<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet"> -->
+	<link rel="stylesheet" type="text/css" media="screen,print" href="print.css">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="container">
+		<h1>MS <% if {msthesis} %>Thesis<%else%>Coursework<%end%> Plan of Study</h1>
+		<p><b>Student Name</b>: {name}<br>
+		<b>Student ID #</b>: {studentid}<br>
+		<b>Student PID #</b>: {pid}<br>
+		<b>Semester admitted</b>: {admission}</p>
+
+    	<% if {top_messages} %>
+		<table id="transfertbl" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {top_messages} %>"danger"<%else%>"success"<%end%> >
+					<td><h4>Errors and notices</h4>
+				<ul>
+				<% repeat {top_messages} %><li><span class="label label-danger">{message}</span></li><% end %>
+				</ul>
+				<tr class=<% if {totalcr_messages} %>"danger"<%else%>"success"<%end%> >
+				<td>
+				<%if {creditfeedback}%><p>{creditfeedback}</p><%end%>
+				<ul>
+				<% repeat {totalcr_messages} %>
+				<li><span class="label label-danger">{message}</span></li>
+				<% end %>
+				</ul>
+
+				<% repeat {breadth_messages} %>
+				<% if {loopfirst} %>
+					<p>These are the areas you have covered in breadth:</p>
+					<ul>
+				<%end%>
+					<li>{message}</li>
+				<% if {looplast} %></ul><%end%>
+				<% end %>
+
+		    	</td></tr>
+			</thead>
+		</table>
+    	<% end %>
+
+
+		<% if {transfer} %>
+		<table id="transfertbl" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {transfer_messages} %>"danger"<%else%>"success"<%end%> >
+					<td colspan="3"><h4>Transfer Courses</h4>
+		    	<% if {transfer_messages} %>
+					<h5>Messages</h5>
+					<ul>
+					<% repeat {transfer_messages} %>
+					<li><span class="label label-danger">{message}</span></li>
+					<% end %>
+					</ul>
+		    	<% end %>
+				</td></tr>
+				<tr><th class="col-sm-2">Course</th>
+					<th class="col-sm-2">Semester/Year</th>
+					<th class="col-sm-1 numeric">Credits</th></tr>
+			</thead>
+			<tbody>
+				<% repeat {transfer} %>
+				<tr><td>{course} (Area {breadth})</td>
+					<td>{term}</td>
+					<td class="numeric"><span class="transfercredits" name="transfer[{loopcount}][credits]" value="{credits}">{credits}</span></td></tr>
+				<% end %>
+			</tbody>
+			<tfoot>
+				<tr><th></th>
+					<th>Total</th>
+					<td class="numeric"><span id="transfertotal" class="parttotal">credits</span></td></tr>
+			</tfoot>
+		</table>
+		<% end %>
+
+		<% if {senior} %>
+		<table id="seniortbl" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {senior_messages} %>"danger"<%else%>"success"<%end%> >
+					<td colspan="3"><h4>4000 Level Courses</h4>
+		    	<% if {senior_messages} %>
+					<h5>Messages</h5>
+					<ul>
+					<% repeat {senior_messages} %>
+					<li><span class="label label-danger">{message}</span></li>
+					<% end %>
+					</ul>
+		    	<% end %>
+				</td></tr>
+				<tr><th class="col-sm-2">Course</th>
+					<th class="col-sm-2">Semester/Year</th>
+					<th class="col-sm-1 numeric">Credits</th></tr>
+			</thead>
+			<tbody>
+				<% repeat {senior} %>
+				<tr><td>{course}</td>
+					<td>{term}</td>
+					<td class="numeric"><span class="seniorcredits" name="senior[{loopcount}][credits]">{credits}</span></td></tr>
+				<% end %>
+			</tbody>
+			<tfoot>
+				<tr><th></th>
+					<th>Total</th><td class="numeric"><span id="seniortotal" class="parttotal">credits</span></td></tr>
+			</tfoot>
+		</table>
+		<% end %>
+
+
+		<% if {fivethousand} %>
+		<table id="fivethousandtbl" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {fivethousand_messages} %>"danger"<%else%>"success"<%end%> >
+					<td colspan="3"><h4>CS 5000 Level Courses</h4>
+		    	<% if {fivethousand_messages} %>
+		    		<h5>Messages</h5>
+					<ul>
+					<% repeat {fivethousand_messages} %>
+					<li><span class="label label-danger">{message}</span></li>
+					<% end %>
+					</ul>
+		    	<% end %>
+				</td></tr>
+				<tr><th class="col-sm-3">Course</th>
+					<th class="col-sm-1">Semester/Year</th>
+					<th class="col-sm-1 numeric">Credits</th></tr>
+			</thead>
+			<tbody>
+				<% repeat {fivethousand} %>
+				<tr><td>{course} {title} ({breadth})</td>
+					<td>{term}</td>
+					<td class="numeric"><span class="fivethousandcredits" name="fivethousand[{loopcount}][credits]">{credits}</span></td></tr>
+				<% end %>
+			</tbody>
+			<tfoot>
+				<tr><th></th>
+					<th>Total</th>
+					<td class="numeric"><span id="fivethousandtotal" class="parttotal">credits</span></td></tr>
+			</tfoot>
+		</table>
+		<% end %>
+
+<% if {msthesis} %>
+		<% if {sixthousand} %>
+		<table id="sixthousandtbl" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {sixthousand_messages} %>"danger"<%else%>"success"<%end%> >
+					<td colspan="3"><h4>CS 6000 Level Courses</h4>
+		    	<% if {sixthousand_messages} %>
+		    		<h5>Messages</h5>
+					<ul>
+					<% repeat {sixthousand_messages} %>
+					<li><span class="label label-danger">{message}</span></li>
+					<% end %>
+					</ul>
+		    	<% end %>
+				</td></tr>
+				<tr><th class="col-sm-3">Course</th>
+					<th class="col-sm-1">Semester/Year</th>
+					<th class="col-sm-1 numeric">Credits</th></tr>
+			</thead>
+			<tbody>
+				<% repeat {sixthousand} %>
+				<tr><td>{course} {title} ({breadth})</td>
+					<td>{term}</td>
+					<td class="numeric"><span class="sixthousandcredits" name="sixthousand[{loopcount}][credits]" value="{credits}">{credits}</span></td></tr>
+				<% end %>
+			</tbody>
+			<tfoot>
+				<tr><th></th>
+					<th>Total</th><td class="numeric"><span id="sixthousandtotal" class="parttotal">credits</span></td></tr>
+			</tfoot>
+		</table>
+		<% end %>
+<% end %>
+
+
+		<table id="seminartbl" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {seminar_messages} %>"danger"<%else%>"success"<%end%>  >
+					<td colspan="3"><h4>CS 5944 Graduate Seminar</h4>
+		    	<% if {seminar_messages} %>
+		    		<h5>Messages</h5>
+					<ul>
+					<% repeat {seminar_messages} %>
+					<li><span class="label label-danger">{message}</span></li>
+					<% end %>
+					</ul>
+		    	<% end %>
+				</td></tr>
+				<tr><th class="col-sm-2">Course</th>
+					<th class="col-sm-2">Semester/Year</th>
+					<th class="col-sm-1 numeric">Credits</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>CS5944 Graduate Seminar</td><td>{seminar1}</td><td class="numeric">1</td></tr>
+				<tr><td>CS5944 Graduate Seminar</td><td>{seminar2}</td><td class="numeric">1</td></tr>
+				<tr><td>CS5944 Graduate Seminar</td><td>{seminar3}</td><td class="numeric">1</td></tr>
+			</tbody>
+			<tfoot>
+				<tr><th></th><th>Total</th><td class="numeric"><span id="seminartotal">3</span></td></tr>
+			</tfoot>
+		</table>
+
+<% if {msthesis} %>
+<% include thesisprt.tmpl %>
+<% else %>
+<% include courseworkprt.tmpl %>
+<% end %>
+
+
+		<table id="committeetbl" class="table table-striped table-bordered">
+			<tr class="success">
+				<td colspan="4"><h4>Advisory Committee Members</h4></td></tr>
+			<tr><th class="col-sm-2">Name</th>
+				<th class="col-sm-3">Signature</th>
+				<th class="col-sm-2">Department/University</th>
+				<th class="col-sm-2">Role</th>
+			</tr>
+			<tbody>
+				<% repeat {committee} %>
+				<tr>
+					<td>{profname}</td>
+					<td></td>
+					<td>{department}</td>
+					<td>
+						<% if {role1} %>
+						Chair
+						<% else %>
+							<% if {role2} %>
+							Co-Chair
+							<% else %>
+								<% if {role3} %>
+								Member
+								<% else %>
+								Outside Member
+								<% end %>
+							<% end %>
+						<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<table id="comments" class="table table-striped table-bordered">
+			<thead>
+				<tr class=<% if {comment_messages} %>"danger"<%else%>"success"<%end%> >
+					<td colspan="2"><h4>Comments and exceptions</h4></td></tr>
+		    	<% if {comment_messages} %>
+		    	<tr><td colspan="2">
+		    		  <ul>
+		    		  <% repeat {comment_messages} %>
+		    		  <li><span class="label label-danger">{message}</span></li>
+		    		  <% end %>
+		    		</ul>
+		    	</td></tr>
+		    	<% end %>
+			</thead>
+			<tbody>
+				<tr><th>Comments:</th><td><i>{comments}</i></td></tr>
+			</tbody>
+		</table>
+
+		<h3>Total credits in this plan of study: <span id="totalcredits">total</span> (90 minimum)</h3>
+
+
+		<table class="table table-striped table-bordered">
+			<t (90 minimum)r class="success"><td colspan="4"><h4>Signatures</h4></td></tr>
+			<tr><th class="col-sm-2">Title</th>
+				<th class="col-sm-2">Name</th>
+				<th class="col-sm-4">Signature</th>
+				<th class="col-sm-1">Date</th></tr>
+			<tr><td>Student</td>
+				<td>{name}</td>
+				<td></td>
+				<td>{printed}</td></tr>
+			<tr><td>Graduate Program Director</td><td>{director}</td>
+				<td></td>
+				<td></td></tr>
+			<!-- <tr><td>Department Head</td><td>{depthead}</td> -->
+				<td></td>
+				<td></td></tr>
+		</table>
+    </div> <!-- /container -->
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted credit">CS@VT - Printed on {printed}</p>
+      </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript">
+
+    	// when the document is ready, update all the field totals
+      	$(document).ready(
+      		function() {
+      			calculate(".fivethousandcredits", "#fivethousandtotal");
+      			calculate(".sixthousandcredits", "#sixthousandtotal");
+      			calculate(".transfercredits", "#transfertotal");
+      			calculate(".seniorcredits", "#seniortotal");
+      			calculate(".cognatescredits", "#cognatestotal");
+      			calculate(".researchcredits", "#researchtotal");
+      			calculate2(".parttotal", "#totalcredits");
+      		});
+
+
+        function calculate(values, totalfield)
+        {   var total = 0;
+        	$(values).each(function(index) { total += Number($(this).html()); });
+            $(totalfield).text(total);
+        }
+
+        function calculate2(values, totalfield)
+        {   var total = 0;
+        	$(values).each(function(index) { total += Number($(this).html()); });
+            $(totalfield).text(total);
+        }
+    </script>
+  </body>
+</html>

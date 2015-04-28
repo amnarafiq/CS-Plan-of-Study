@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CS@VT PhD Plan of Study</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="plan of study for CS graduate programs">
+	<meta name="author" content="benevolent dictator">
+
+	<!-- Le styles -->
+	<style>
+	  body {
+	    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+	  }
+	</style>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand" >CS@VT PhD Plan of Study</span>
+          <ul class="nav navbar-nav">
+            <li><a href="instructions.php" target="_blank">Instructions</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+	    <form id="theform" name="theform" class="form-horizontal" role="form" method="POST" action="index.php">
+			<input type="hidden" id="form" value="go">
+			<h1>PhD Plan of Study</h1>
+			<div class="form-group">
+				<label for="name" class="col-sm-2 control-label">Student Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="name" name="name" placeholder="Full name" value="{name}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="studentid" class="col-sm-2 control-label">Student ID #</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="studentid" name="studentid" placeholder="e.g. 9999-99999" value="{studentid}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="pid" class="col-sm-2 control-label">Student PID</label>
+				<div class="input-group col-sm-3">
+					<input type="text" class="form-control" id="pid" name="pid" placeholder="PID" value="{pid}">
+					<span class="input-group-addon">@vt.edu</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="admission" class="col-sm-2 control-label">Semester admitted</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="admission" name="admission" placeholder="Term and year, e.g. Fall 2013" value="{admission}">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="admission" class="col-sm-2 control-label">Reference material</label>
+				<div class="col-sm-10">
+					<ol>
+						<li><a href="http://www.cs.vt.edu/files/GraduateCSHandbook.pdf" target="_blank">CS Graduate Handbook</a></li>
+						<li><a href="../courses.php" target="_blank">Courses and areas</a></li>
+					</ol>
+				</div>
+			</div>
+
+    	<% if {top_messages} %>
+    	<div class="alert alert-danger">
+    		<p><b>Errors</b>: please clear these errors and press validate again.</p>
+			<ul>
+				<% repeat {top_messages} %><li>{message}</li><% end %>
+			</ul>
+    	</div>
+    	<% end %>
+
+			<table id="transfertbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {transfer_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+						<td colspan="4"><h4>Transfer Courses</h4>
+						<p>Ph.D. students may transfer a maximum of 5 regular courses (15 credit hours). You can transfer courses taken at other universities and apply them to your plan of study. <%include transferexplanation.tmpl%></p>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#transfermodal">More info...</button>
+
+<!-- Modal -->
+<div class="modal fade" id="transfermodal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="transferModalLabel">Transfer Credits</h4>
+      </div>
+      <div class="modal-body">
+      	<% include transfer.tmpl %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+			    	<% if {transfer_messages} %>
+						<h5>Messages</h5>
+						<ul>
+						<% repeat {transfer_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+					</td></tr>
+					<tr><th class="col-sm-2">Course</th>
+						<th class="col-sm-2">Semester/Year</th>
+						<th class="col-sm-2">Breadth Area</th>
+						<th class="col-sm-1">Credits</th></tr>
+				</thead>
+				<tbody>
+					<% repeat {transfer} %>
+					<tr><td><input type="text" class="course" name="transfer[{loopcount}][course]" placeholder="Transfer" value="{course}"></td>
+						<td><input type="text" class="term" name="transfer[{loopcount}][term]" placeholder="e.g. Fall 2013" value="{term}"></td>
+
+						<td><select name="transfer[{loopcount}][breadth]" class="form-control input-sm">
+							<option {area0} value="0">Area 0: Research</option>
+							<option {area1} value="1">Area 1: Algorithms and Theory</option>
+							<option {area2} value="2">Area 2: Computer Systems</option>
+							<option {area3} value="3">Area 3: Programming Languages</option>
+							<option {area4} value="4">Area 4: Numerical and Scientific Computing</option>
+							<option {area5} value="5">Area 5: Computer Architecture and Networking</option>
+							<option {area6} value="6">Area 6: Data and Information</option>
+							<option {area7} value="7">Area 7: Software Engineering</option>
+							<option {area8} value="8">Area 8: Human-Computer Interaction</option>
+							<option {area9} value="9">Area 9: Intelligent Systems</option>
+							<option {area10} value="10">Area 10: Computational Biology and Bioinformatics</option>
+							</select>
+						</td>
+
+
+						<td><input type="text" class="transfercredits" name="transfer[{loopcount}][credits]" placeholder="Credits" value="{credits}"> <a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th colspan="2"><a onclick="addtransfer('#transfertbl', 5);"><span class="glyphicon glyphicon-plus-sign"></span></a></th>
+						<th>Total</th>
+						<td><span id="transfertotal" class="parttotal">credits</span></td></tr>
+				</tfoot>
+			</table>
+
+			<table id="seniortbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {senior_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+					<td colspan="3"><h4>4000 Level Courses</h4>
+						<p>Only 1 course (3 credits) at this level can be included in a PhD plan of study. 4000 level courses cannot be used for breadth requirements. Enter the course number as CS 4xxx or CS4xxx.</p>
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#seniorModal">More info...</button>
+
+<!-- Modal -->
+<div class="modal fade" id="seniorModal" tabindex="-1" role="dialog" aria-labelledby="seniorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="seniorModalLabel">4000-level Credits</h4>
+      </div>
+      <div class="modal-body">
+      	<% include 4000.tmpl %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+			    	<% if {senior_messages} %>
+						<h5>Messages</h5>
+						<ul>
+						<% repeat {senior_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+			    	</td></tr>
+					<tr><th class="col-sm-2">Course</th>
+						<th class="col-sm-2">Semester/Year</th>
+						<th class="col-sm-1">Credits</th></tr>
+				</thead>
+				<tbody>
+					<% repeat {senior} %>
+					<tr><td><input type="text" class="course" name="senior[{loopcount}][course]" placeholder="CS 4xxx Title" value="{course}"></td>
+						<td><input type="text" class="term" name="senior[{loopcount}][term]" placeholder="e.g. Fall 2013" value="{term}"></td>
+						<td><input type="text" class="seniorcredits" name="senior[{loopcount}][credits]" placeholder="Credits" value="{credits}"> <a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th><a onclick="addrow('#seniortbl', 'senior', 1);"><span class="glyphicon glyphicon-plus-sign"></span></a></th>
+						<th>Total</th><td><span id="seniortotal" class="parttotal">credits</span></td></tr>
+				</tfoot>
+			</table>
+
+			<table id="fivethousandtbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {fivethousand_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+					<td colspan="3"><h4>5000 Level Courses</h4>
+						<p>You need 9 courses (27 credits) 4000 or above. If you used one 4000 above, then you need 8 courses (24 credits) of 5000 or above. Enter the course number as CS 5xxx or CS5xxx. All courses 5000 and above have a fixed breadth area, so you do not need to enter that; we will provide it.</p>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#fivethousandModal">More info...</button>
+
+<!-- Modal -->
+<div class="modal fade" id="fivethousandModal" tabindex="-1" role="dialog" aria-labelledby="fivethousandModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="fivethousandModalLabel">5000 Level Courses</h4>
+      </div>
+      <div class="modal-body">
+      	<% include 5000.tmpl %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+			    	<% if {fivethousand_messages} %>
+			    		<h5>Messages</h5>
+						<ul>
+						<% repeat {fivethousand_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+			    	</td></tr>
+					<tr><th class="col-sm-3">Course</th>
+						<th class="col-sm-1">Semester/Year</th>
+						<th class="col-sm-1">Credits</th></tr>
+
+				</thead>
+				<tbody>
+					<% repeat {fivethousand} %>
+					<tr><td><input type="text" class="course" name="fivethousand[{loopcount}][course]" placeholder="CS 5xxx" value="{course}"> {breadth}</td>
+						<td><input type="text" class="term" name="fivethousand[{loopcount}][term]" placeholder="e.g. Fall 2013" value="{term}"></td>
+						<td><input type="text" class="fivethousandcredits" name="fivethousand[{loopcount}][credits]" placeholder="Credits" value="{credits}"> <a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th><a onclick="addrow('#fivethousandtbl', 'fivethousand', 9);"><span class="glyphicon glyphicon-plus-sign"></span></a></th>
+						<th>Total</th><td><span id="fivethousandtotal" class="parttotal">credits</span></td></tr>
+				</tfoot>
+			</table>
+
+			<table id="sixthousandtbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {sixthousand_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+						<td colspan="3"><h4>CS 6000 Level Courses</h4>
+						<p>You need at least 2 courses (6 credits) from CS 6000 level courses. These courses count for breadth requirement.</p>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#SixThousandModal">More info...</button>
+
+<!-- Modal -->
+<div class="modal fade" id="SixThousandModal" tabindex="-1" role="dialog" aria-labelledby="SixThousandModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="SixThousandModalLabel">6000 Courses</h4>
+      </div>
+      <div class="modal-body">
+      	<% include 6000.tmpl %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+			    	<% if {sixthousand_messages} %>
+			    		<h5>Messages</h5>
+						<ul>
+						<% repeat {sixthousand_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+			    	</td></tr>
+					<tr><th class="col-sm-3">Course</th>
+						<th class="col-sm-1">Semester/Year</th>
+						<th class="col-sm-1">Credits</th></tr>
+				</thead>
+				<tbody>
+					<% repeat {sixthousand} %>
+					<tr><td><input type="text" class="course" name="sixthousand[{loopcount}][course]" placeholder="CS 6xxx Title" value="{course}"> {breadth}</td>
+						<td><input type="text" class="term" name="sixthousand[{loopcount}][term]" placeholder="e.g. Fall 2013" value="{term}"></td>
+						<td><input type="text" class="sixthousandcredits" name="sixthousand[{loopcount}][credits]" placeholder="Credits" value="{credits}"> <a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th><a onclick="addrow('#sixthousandtbl', 'sixthousand', 10);"><span class="glyphicon glyphicon-plus-sign"></span></a></th>
+						<th>Total</th><td><span id="sixthousandtotal" class="parttotal">credits</span></td></tr>
+				</tfoot>
+			</table>
+
+			<table id="cognatetbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {cognate_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+						<td colspan="4"><h4>Cognate Courses</h4>
+						<p>You need exactly 2 courses (6 credits) from the approved list of cognate courses. These courses do not count towards breadth requirement.</p>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#CognateModal">More info...</button>
+
+<!-- Modal -->
+<div class="modal fade" id="CognateModal" tabindex="-1" role="dialog" aria-labelledby="CognateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="CognateModalLabel">Cognate Courses</h4>
+      </div>
+      <div class="modal-body">
+      	<% include cognate.tmpl %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+			    	<% if {cognate_messages} %>
+			    		<h5>Messages</h5>
+						<ul>
+						<% repeat {cognate_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+			    	</td></tr>
+					<tr><th class="col-sm-2">Course</th>
+						<th class="col-sm-2">Semester/Year</th>
+						<th class="col-sm-1">Credits</th></tr>
+				</thead>
+				<tbody>
+					<% repeat {cognate} %>
+					<tr><td><input type="text" class="course" name="cognate[{loopcount}][course]" placeholder="Cognate" value="{course}"></td>
+						<td><input type="text" class="term" name="cognate[{loopcount}][term]" placeholder="e.g. Fall 2013" value="{term}"></td>
+						<td><input type="text" class="cognatecredits" name="cognate[{loopcount}][credits]" placeholder="Credits" value="{credits}"> <a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th><a onclick="addrow('#cognatetbl', 'cognate', 2);"><span class="glyphicon glyphicon-plus-sign"></span></a></th>
+						<th>Total</th><td><span id="cognatetotal" class="parttotal">credits</span></td></tr>
+				</tfoot>
+			</table>
+
+
+			<table id="seminartbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {seminar_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+					<td colspan="3"><h4>CS 5944 Graduate Seminar</h4>
+						<p>Three semesters of 1 credit each required in each plan of study. These credits do not count towards the 90 minimum credits required for the plan of study.</p>
+						<p>If you do not have 3 seminars but have an approved exception to this requirement, then just leave the semester blank and write a note in the comments section indicating how and when you obtained the approval.</p>
+			    	<% if {seminar_messages} %>
+			    		<h5>Messages</h5>
+						<ul>
+						<% repeat {seminar_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+			    	</td></tr>
+					<tr><th class="col-sm-2">Course</th>
+						<th class="col-sm-2">Semester/Year</th>
+						<th class="col-sm-1">Credits</th></tr>
+				</thead>
+				<tbody>
+					<tr><td>CS5944 Graduate Seminar</td>
+						<td><input type="text" class="term" name="seminar1" placeholder="e.g. Fall 2013" value="{seminar1}"></td><td>1</td></tr>
+					<tr><td>CS5944 Graduate Seminar</td>
+						<td><input type="text" class="term" name="seminar2" placeholder="e.g. Fall 2013" value="{seminar2}"></td><td>1</td></tr>
+					<tr><td>CS5944 Graduate Seminar</td>
+						<td><input type="text" class="term" name="seminar3" placeholder="e.g. Fall 2013" value="{seminar3}"></td><td>1</td></tr>
+				</tbody>
+				<tfoot>
+					<tr><th></th><th>Total</th><td>3</td></tr>
+				</tfoot>
+			</table>
+
+			<table id="researchtbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {research_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+					<% end %>
+					<td colspan="3"><h4>Research and Dissertation</h4>
+						<p>You must complete at least 30 credits of CS 7994. Often you have many more than 30 in your plan of study.</p>
+			    	<% if {research_messages} %>
+						<ul>
+						<% repeat {research_messages} %>
+						<li><span class="label label-danger">{message}</span></li>
+						<% end %>
+						</ul>
+			    	<% end %>
+			    	</td></tr>
+					<tr><th class="col-sm-2">Course</th>
+						<th class="col-sm-2">Semester/Year</th>
+						<th class="col-sm-1">Credits</th></tr>
+				</thead>
+				<tbody>
+					<% repeat {research} %>
+					<tr><td>CS 7994 Research and Dissertation</td>
+						<td><input type="text" id="term{loopcount}" name="research[{loopcount}][term]" placeholder="e.g. Fall 2013" value="{term}"></td>
+						<td><input type="text" class="researchcredits" id="credits{loopcount}" name="research[{loopcount}][credits]" placeholder="Credits" value="{credits}"> <a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th><a onclick="addresearch('#researchtbl', 'research');"><span class="glyphicon glyphicon-plus-sign"></span></a></th><th>Total</th><td><span id="researchtotal" class="parttotal">credits</span></td></tr>
+				</tfoot>
+			</table>
+
+			<table id="totalcrtbl" class="table table-striped table-bordered table-condensed">
+				<thead>
+			    	<% if {totalcr_messages} %>
+					<tr class="danger">
+					<% else %>
+					<tr class="success">
+			    	<% end %>
+					<td colspan="3"><h4>Total Graduate Credits</h4>
+					<%if {creditfeedback}%><p>{creditfeedback}</p><%end%>
+					<ul>
+					<% repeat {totalcr_messages} %>
+					<li><span class="label label-danger">{message}</span></li>
+					<% end %>
+					</ul>
+
+					<% repeat {breadth_messages} %>
+					<% if {loopfirst} %>
+						<p>These are the areas you have covered in breadth:</p>
+						<ul>
+					<%end%>
+						<li>{message}</li>
+					<% if {looplast} %></ul><%end%>
+					<% end %>
+
+					<p><b>Total credits in this plan of study:
+						<span id="totalcredits">total</span></b></p>
+			    	</td></tr>
+
+				</thead>
+			</table>
+
+
+			<table id="committeetbl" class="table table-striped table-bordered table-condensed">
+				<tr class="success"><td colspan="4"><h4>Advisory Committee Members</h4>
+					<p>Enter the names of the members of your advisory committee and select their role in the committee.</p>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#CommitteeModal">More info...</button>
+
+<!-- Modal -->
+<div class="modal fade" id="CommitteeModal" tabindex="-1" role="dialog" aria-labelledby="CommitteeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="CommitteeModalLabel">Advisory Committee</h4>
+      </div>
+      <div class="modal-body">
+      	<% include committee.tmpl %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+				</td></tr>
+				<tr><th class="col-sm-2">Role</th>
+					<th class="col-sm-3">Name</th>
+					<th class="col-sm-3">Department/University</th>
+					<th class="col-sm-1">Signature</th></tr>
+				<tbody>
+					<% repeat {committee} %>
+					<tr>
+						<td><select name="committee[{loopcount}][role]" 
+							class="form-control facultyname input-sm">
+						<option {role1} value="1">Chair</option>
+						<option {role2} value="2">Co-Chair</option>
+						<option {role3} value="3">Member</option>
+						<option {role4} value="4">Outside Member</option>
+						</select></td>
+
+						<td class="col-sm-4">
+							<input class="col-sm-11" type="text" name="committee[{loopcount}][profname]" placeholder="Name" value="{profname}"></td>
+
+						<td class="col-sm-4">
+							<input class="col-sm-11" type="text" name="committee[{loopcount}][department]" placeholder="CS/VT" value="{department}">&nbsp;
+						<a onclick="$(this).closest('tr').remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td>
+
+						<td></td></tr>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr><th colspan="4"><a onclick="addcommittee('#committeetbl');"><span class="glyphicon glyphicon-plus-sign"></span></a></th></tr>
+				</tfoot>
+
+			</table>
+
+			<table id="comments" class="table table-striped table-bordered table-condensed">
+				<thead>
+					<tr class="success"><td colspan="2"><h4>Comments and exceptions</h4>
+						<p>Please include below any exceptions or other comments that explain unique conditions in your plan of study.</p></td></tr>
+			    	<% if {comment_messages} %>
+			    	<tr><td colspan="2">
+			    		  <ul>
+			    		  <% repeat {comment_messages} %>
+			    		  <li><span class="label label-danger">{message}</span></li>
+			    		  <% end %>
+			    		</ul>
+			    	</td></tr>
+			    	<% end %>
+				</thead>
+				<tbody>
+					<tr><th>Comments</th>
+						<td>
+							<textarea class="form-control" rows="4" cols="50" name="comments">{comments}</textarea></td></tr>
+				</tbody>
+			</table>
+
+			<table class="table table-striped table-bordered table-condensed">
+				<tr class="success"><td colspan="4"><h4>Signatures</h4></td></tr>
+				<tr><th class="col-sm-2">Title</th><th class="col-sm-2">Name</th><th class="col-sm-4">Signature</th><th class="col-sm-1">Date</th></tr>
+				<tr><td>Student</td><td>{name}</td><td></td><td></td></tr>
+				<tr><td>Graduate Program Director</td><td>{director}</td><td></td><td></td></tr>
+				<!-- <tr><td>Department Head</td><td>{depthead}</td><td></td><td></td></tr> -->
+			</table>
+
+
+
+			<input id="submit" name="submit" type="submit" value="Validate" class="btn btn-primary">
+			<input id="print" name="submit" type="submit" value="Print" class="btn btn-primary">
+			<input id="download" name="submit" type="submit" value="Download" class="btn btn-primary">
+
+    	</form>
+    </div> <!-- /container -->
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted credit">CS@VT - Printed on {printed}</p>
+      </div>
+    </div>
+
+    <!-- javascript -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed  -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+   
+    <script type="text/javascript">
+
+    	// when the document is ready, update all the field totals
+      	$(document).ready(
+      		function() {
+      			calculate(".fivethousandcredits", "#fivethousandtotal");
+      			calculate(".sixthousandcredits", "#sixthousandtotal");
+      			calculate(".transfercredits", "#transfertotal");
+      			calculate(".seniorcredits", "#seniortotal");
+      			calculate(".cognatecredits", "#cognatetotal");
+      			calculate(".researchcredits", "#researchtotal");
+      			calculate2(".parttotal", "#totalcredits");
+      		});
+
+
+      	// process selection of faculty name
+      	// $(".facultyname")
+
+
+      	// set a change event to update totals 
+      	$(document).ready($(".fivethousandcredits").change(
+      		function() {
+      			calculate(".fivethousandcredits", "#fivethousandtotal");
+      			calculate2(".parttotal", "#totalcredits");}));
+      	$(document).ready($(".sixthousandcredits").change(
+      		function() {
+      			calculate(".sixthousandcredits", "#sixthousandtotal");
+      			calculate2(".parttotal", "#totalcredits");}));
+      	$(document).ready($(".transfercredits").change(
+      		function() {
+      			calculate(".transfercredits", "#transfertotal");
+      			calculate2(".parttotal", "#totalcredits");}));
+      	$(document).ready($(".seniorcredits").change(
+      		function() {
+      			calculate(".seniorcredits", "#seniortotal");
+      			calculate2(".parttotal", "#totalcredits");}));
+      	$(document).ready($(".cognatecredits").change(
+      		function() {
+      			calculate(".cognatecredits", "#cognatetotal");
+      			calculate2(".parttotal", "#totalcredits");}));
+      	$(document).ready($(".researchcredits").change(
+      		function() {
+      			calculate(".researchcredits", "#researchtotal");
+      			calculate2(".parttotal", "#totalcredits");}));
+
+        function calculate(values, totalfield)
+        {   var total = 0;
+        	$(values).each(function(index) { total += Number($( this ).val()); });
+            $(totalfield).text(total);
+        }
+
+        function calculate2(values, totalfield)
+        {   var total = 0;
+        	$(values).each(function(index) { total += Number($(this).html()); });
+            $(totalfield).text(total);
+        }
+
+        function addseminarrow(tb)
+        {
+    		var i = $(tb+' tr').length;
+    		var row = '<tr><td>CS5994</td><td><input type="text" id="term'+i+'" name="seminar['+i+'][term]" placeholder="e.g. Fall 2013" value=""></td><td>1</td></tr>';
+    		$(tb+' > tbody:last').append(row);
+        }
+
+        function addcommittee(tb)
+        {
+    		var i = $(tb+' tr').length;
+			var row = '<tr><td><select name="role" class="form-control facultyname input-sm"><option>Chair</option><option>Co-Chair</option><option>Member</option><option>Outside Member</option></select></td><td><input type="text" name="committee['+i+'][profname]" placeholder="Name"></td><td></td><td></td></tr>';
+    		$(tb+' > tbody:last').append(row);
+        }
+
+    	function addresearch(tb, field)
+    	{
+    		var i = $(tb+' tr').length;
+    		var row = '<tr><td>CS 7994 Research and Dissertation</td><td><input type="text" id="term'+i+'" name="'+field+'['+i+'][term]" placeholder="e.g. Fall 2013" value=""></td><td><input type="text" class="'+field+'credits" name="'+field+'['+i+'][credits]" placeholder="Credits" value=""></td></tr>';
+    		$(tb+' > tbody:last').append(row);
+    	}
+
+    	function addtransfer(tb, rows)
+    	{
+    		var i = $(tb+' tr').length;		// how many rows we have?
+    		if (i < 3+rows) {	// if we can still add some...
+	    		var row = '<tr>\
+	    		<td><input type="text" class="course" name="transfer['+i+'][course]" placeholder="e.g., CS xxxx"></td>\
+	    		<td><input type="text" class="term" name="transfer['+i+'][term]" placeholder="e.g. Fall 2013" value=""></td>\
+	    		<td><select name="transfer['+i+'][breadth]" class="form-control input-sm"><option value="1">Area 1: Algorithms and Theory</option><option value="2">Area 2: Computer Systems</option><option value="3">Area 3: Programming Languages</option><option value="4">Area 4: Numerical and Scientific Computing</option><option value="5">Area 5: Computer Architecture and Networking</option><option value="6">Area 6: Data and Information</option><option value="7">Area 7: Software Engineering</option><option value="8">Area 8: Human-Computer Interaction</option><option value="9">Area 9: Intelligent Systems</option><option value="10">Area 10: Computational Biology and Bioinformatics</option></select></td>\
+	    		<td><input type="text" class="transfercredits" name="transfer['+i+'][credits]" placeholder="Credits" value="3"> <a onclick="$(this).closest("tr").remove();"><span name="deleterow" class="glyphicon glyphicon-minus-sign"></span></a></td></tr>';
+    			$(tb+' > tbody:last').append(row);
+    		}
+    	}
+
+    	// AddRow to table 'tb' and use prefix 'field' as name for the input field
+    	// adds a row if the table has less than 'rows'
+    	// All tables have 3 rows (header, column heads, and footer)
+    	function addrow(tb, field, rows)
+    	{
+    		var i = $(tb+' tr').length;
+    		console.log("num rows " + Number(i));
+    		if (i < 3+rows) {
+	    		var row = '<tr><td><input type="text" class="course" name="'+field+'['+i+'][course]" placeholder="e.g., CS xxxx" value=""></td><td><input type="text" id="term'+i+'" name="'+field+'['+i+'][term]" placeholder="e.g. Fall 2013" value=""></td><td><input type="text" class="'+field+'credits" name="'+field+'['+i+'][credits]" placeholder="Credits" value="3"></td></tr>';
+	    		$(tb+' > tbody:last').append(row);
+    		}
+    	}
+    </script>
+  </body>
+</html>

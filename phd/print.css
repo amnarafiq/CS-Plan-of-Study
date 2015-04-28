@@ -1,0 +1,96 @@
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+   
+   Feel free (nay, compelled) to edit, append, and 
+   manipulate this file as you see fit. */
+   
+
+/* SECTION 1: Set default width, margin, float, and
+   background. This prevents elements from extending 
+   beyond the edge of the printed page, and prevents
+   unnecessary background images from printing */
+body, #content, #container {
+	width: 98%;
+	margin: 10;
+	float: none;
+	background: #fff url(none);
+}
+
+/* SECTION 2: Remove any elements not needed in print. 
+   This would include navigation, ads, sidebars, etc. 
+#topnav, #navbar, #nav, #sidebar, .ad, .noprint {
+	display: none; 
+}
+*/
+
+/* SECTION 3: Set body font face, size, and color.
+   Consider using a serif font for readability. */
+body {
+	font: 12px "Times New Roman", Times, Georgia, serif;		/* modified by mapq */
+	color: #000; 
+}
+
+/* SECTION 4: Set heading font face, sizes, and color.
+   Diffrentiate your headings from your body text.
+   Perhaps use a large sans-serif for distinction. */
+h1,h2,h3,h4,h5,h6 {
+	font-family: Helvetica, Arial, sans-serif;
+	color: #000;
+}
+h1 { font-size: 125%; font-weight:bold !important; }	/* modified mapq */
+h2 { font-size: 110%; }
+h3 { font-size: 105%; }
+h4 { font-size: 100%; font-weight:bold !important;}
+h5 { font-size: 100%; font-variant: small-caps  !important;}
+h6 { font-size: 100%; font-style: italic !important;}
+
+/* SECTION 5: Make hyperlinks more usable.
+   Ensure links are underlined, and consider appending
+   the URL to the end of the link for usability. */
+a:link, a:visited {
+	color: #00c;
+	font-weight: bold;
+	text-decoration: underline; 
+}
+#content a:link:after, #content a:visited:after {
+	content: " (" attr(href) ") ";
+}
+
+/* added by manuel, to setup print colors and formats
+ 	bootstrap green #dff0d8 
+	bootstrap red #f2dede
+	alternating row colors #F6F4F0 and #FFFFFF
+	row (bottom) border #A0A0A0
+*/
+
+table.table-bordered {
+	width: 100%;
+	margin-top:12px;
+	border-collapse:collapse;
+	border-width:1px;
+	border-color: black;
+	border-style: solid; 
+}
+
+table>thead:first-child>tr.success {background-color: #dff0d8 !important; }
+table thead tr.danger {background-color: #f2dede !important; }
+
+table.table-striped tr:nth-child(odd)		{background-color: #F6F4F0;}
+table.table-striped tr:nth-child(even)	{background-color:#ffffff;}
+table.table-striped th, td
+{
+	border-width:1px;
+	border-color: #A0A0A0;
+	border-bottom-style: solid; 
+	padding: 5px;
+}
+th {
+	text-align: left;
+}
+
+th.numeric, td.numeric
+{
+	text-align:right !important;
+	padding-right:1cm;
+}

@@ -1,0 +1,136 @@
+5000-level and above
+VT
+Fall 2005	CS 4984	Special Study	3	Pass	VT
+Fall 2005	CS 6604	Adv Tops Data & Info	3	Pass	VT
+Spring 2006	CS 5734	Comptr-Supp Coop Work	3	Pass	VT
+Spring 2006	CS 5984	Special Study	3	Pass	VT
+Fall 2006	CS 5614	Database Management Systems	3	Pass	VT
+Spring 2007	CS 5604	Info Storage and Ret	3	Pass	VT
+Fall 2007	CS 6604	Adv Tops Data & Info	3	Pass	VT
+Spring 2008	CS 6724	Advanced Topics HCI	3	Pass	VT
+Fall 2008	ISE 5604	Human Information Processing	3	Pass	VT
+Spring 2009	STAT 5616	Statistics in Research	3	Pass	VT
+Fall 2009	CS 5704	Software Engineering	3	Pass	VT
+Fall 2009	CS 5764	Information Visualization	3	Pass	VT
+Fall 2010	CS 5014	Research Meth in CS	3	Pass	VT
+Research and Thesis/Dissertation
+N/A	VT
+Fall 2006	CS 7994	Research and Dissertation	9	N/A	VT
+Spring 2007	CS 7994	Research and Dissertation	9	N/A	VT
+Fall 2007	CS 7994	Research and Dissertation	15	N/A	VT
+Spring 2008	CS 7994	Research and Dissertation	15	N/A	VT
+Fall 2008	CS 7994	Research and Dissertation	12	N/A	VT
+Spring 2009	CS 7994	Research and Dissertation	15	N/A	VT
+Transfer Courses
+N/A	
+
+
+
+
+
+
+
+Term	Course Number	Course Title	Credit Hours	Grade	Institute
+5000-level and above
+VT
+Fall 2007	CS 5764	Information Visualization	3	Pass	VT
+Fall 2007	CS 6604	Adv Tops Data & Info	3	Pass	VT
+Fall 2007	ECE 5565	Network Arch and Protocols	3	Pass	VT
+Spring 2008	CS 5114	Theory of Algorithms	3	Pass	VT
+Spring 2008	CS 5466	Numerical Analysis	3	Pass	VT
+Spring 2008	CS 5604	Info Storage and Ret	3	Pass	VT
+Fall 2008	CS 5634	Data Management Bioinformatics	3	Pass	VT
+Spring 2010	CS 4624	Multimedia/Hypertext	3	Pass	VT
+Spring 2010	ISE 5406	Optimization	3	Pass	VT
+Fall 2010	CS 5465	Numerical Analysis	3	Pass	VT
+Fall 2011	CS 6604	Adv Tops Data & Info	3	Pass	VT
+Research and Thesis/Dissertation
+N/A	VT
+Fall 2007	CS 7994	Research and Dissertation	3	N/A	VT
+Spring 2008	CS 7994	Research and Dissertation	3	N/A	VT
+Fall 2008	CS 7994	Research and Dissertation	9	N/A	VT
+Spring 2009	CS 7994	Research and Dissertation	12	N/A	VT
+Fall 2009	CS 7994	Research and Dissertation	12	N/A	VT
+Spring 2010	CS 7994	Research and Dissertation	6	N/A	VT
+Fall 2010	CS 7994	Research and Dissertation	9	N/A	VT
+Spring 2011	CS 7994	Research and Dissertation	12	N/A	VT
+Fall 2011	CS 7994	Research and Dissertation	9	N/A	VT
+Transfer Courses
+N/A	
+
+
+
+
+
+
+
+
+Term	Course Number	Course Title	Credit Hours	Grade	Institute
+5000-level and above
+VT
+Fall 2009	CS 5014	Research Meth in CS	3	Pass	VT
+Fall 2009	CS 6604	Adv Tops Data & Info	3	Pass	VT
+Spring 2010	CS 5314	Programming Languages	3	Pass	VT
+Spring 2010	CS 6204	Advanced Topics in Systems	3	Pass	VT
+Fall 2010	CS 6570	Adv Foundations of Networking	3	Pass	VT
+Fall 2010	GBCB 5314	Paradigms for Bioinformatics	3	Pass	VT
+Spring 2011	CS 5714	Usability Engineering	3	Pass	VT
+Summer I 2011	GRAD 7944	Grad Coop Educ Prog	0	Pass	VT
+Fall 2011	CS 5510	Multiprocessor Programming	3	Pass	VT
+Summer I 2012	GRAD 7944	Grad Coop Educ Prog	0	Pass	VT
+Research and Thesis/Dissertation
+N/A	VT
+Fall 2009	CS 7994	Research and Dissertation	4	N/A	VT
+Spring 2010	CS 7994	Research and Dissertation	5	N/A	VT
+Fall 2010	CS 7994	Research and Dissertation	5	N/A	VT
+Spring 2011	CS 7994	Research and Dissertation	10	N/A	VT
+Summer I 2011	CS 7994	Research and Dissertation	3	N/A	VT
+Fall 2011	CS 7994	Research and Dissertation	12	N/A	VT
+Spring 2012	CS 7994	Research and Dissertation	12	N/A	VT
+Summer I 2012	CS 7994	Research and Dissertation	3	N/A	VT
+Fall 2012	CS 7994	Research and Dissertation	12	N/A	VT
+Spring 2013	CS 7994	Research and Dissertation	12	N/A	VT
+Fall 2013	CS 7994	Research and Dissertation	12	N/A	VT
+Transfer Courses
+N/A	
+Spring 2008	CS 514	Adv Operating Systems/A	3	N/A	001726-Southern Illinois Univ Carbond
+Summer I 2008	CS 540	Adv Comp Networks/A	3	N/A	001726-Southern Illinois Univ Carbond
+Fall 2008	CS 455	Dsgn & Anal Comp Algorth/A	3	N/A	001726-Southern Illinois Univ Carbond
+Fall 2008	CS 530	Adv Database Systems/A	3	N/A	001726-Southern Illinois Univ Carbond
+Spring 2009	CS 449	Intro to Combinatronics/A	3	N/A	001726-Southern Illinois Univ Carbond
+
+
+
+
+
+
+
+Term	Course Number	Course Title	Credit Hours	Grade	Institute
+5000-level and above
+VT
+Fall 2008	CS 5764	Information Visualization	3	Pass	VT
+Fall 2008	PPWS 5314	Paradigms for Bioinformatics	3	Pass	VT
+Fall 2009	CS 5014	Research Meth in CS	3	Pass	VT
+Fall 2009	CS 6204	Advanced Topics in Systems	3	Pass	VT
+Spring 2010	CS 6604	Adv Tops Data & Info	3	Pass	VT
+Spring 2010	STAT 5616	Statistics in Research	3	Pass	VT
+Research and Thesis/Dissertation
+N/A	VT
+Fall 2008	CS 7994	Research and Dissertation	6	N/A	VT
+Spring 2009	CS 7994	Research and Dissertation	12	N/A	VT
+Fall 2009	CS 7994	Research and Dissertation	6	N/A	VT
+Spring 2010	CS 7994	Research and Dissertation	6	N/A	VT
+Fall 2010	CS 7994	Research and Dissertation	12	N/A	VT
+Spring 2011	CS 7994	Research and Dissertation	12	N/A	VT
+Fall 2011	CS 7994	Research and Dissertation	12	N/A	VT
+Spring 2012	CS 7994	Research and Dissertation	6	N/A	VT
+Transfer Courses
+N/A	
+Fall 2006	CS 518	Adv Op Sys & Sys Prog Res./A	3	N/A	004488-Montana State Univ Bozeman
+Fall 2006	CS 535	Database Theory/A	3	N/A	004488-Montana State Univ Bozeman
+Spring 2007	CS 530	Data Mining/A	3	N/A	004488-Montana State Univ Bozeman
+Fall 2007	CS 510	Computability/A	3	N/A	004488-Montana State Univ Bozeman
+Spring 2008	CS 515	Algorithms/A	3	N/A	004488-Montana State Univ Bozeman
+
+
+
