@@ -8,11 +8,6 @@
 	<meta name="author" content="benevolent dictator">
 
 	<!-- Le styles -->
-	<style>
-	  body {
-	    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	  }
-	</style>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -21,116 +16,108 @@
 	<![endif]-->
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <span class="navbar-brand" >CS@VT Graduate Plan of Study</span>
-        </div>
-      </div>
-    </div>
+  <div class="container">
+  	<div class="row">
+      <div class="col-md-6">
+    		<h3>Instructions</h3>
 
+        <p>This web app allows you to fill out your Plan of Study (PoS). Please
+          read this carefully as this is a quick-and-dirty application that
+          works in particular ways and does only a few things. The PoS is not saved
+          nor is it submitted for you.</p>
+
+        <p><b>Steps to follow:</b>
+          <ol>
+            <li>Meet with your advisor and plan what courses to take.</li>
+            <li>Visit this website and fill out the plan of study.</li>
+            <li>Download the plan of study for your records.</li>
+            <li>Print the plan of study (from this site).</li>
+            <li>Collect signatures from your graduate committee.</li>
+            <li>Submit the form to the CS department (giving it to the Graduate Coordinator).</li>
+            <li>The department collects the signature of the Graduate Director.</li>
+            <li>The plan of study is entered in Banner and approved by the graduate program staff (Director and Coordinator).</li>
+            <li>The plan of study is then forwarded to the graduate school.</li>
+          </ol>
+
+        <p>A note on error checks. As you fill out the form, the app does a validation
+          to check a number of things against the rules
+          for plans of study stated in the CS Graduate Handbook.
+          It is possible that your plan of study will have
+          special circumstances (e.g., transfers, approved cognates out
+          of the list of preapproved courses, new special topics) that
+          cannot be handled by the app.  In those cases, you can still
+          print out the form and submit it, it will just include some
+          checks and notices that will make it easier for the department
+          to process. Any other out of the norm situation, you can include
+          a comment in the form in the space provided.</p>
+      </div>
+
+      <div class="col-md-6">
+        <h3>Graduate Plan of Study</h3>
+        <div class="row well well-sm">
+          <div class="col-md-6">
+            <h5>PhD: Create a new PoS</h5>
+            <a href="phd/index.php" class="btn btn-primary">New</a>
+          </div>
+          <div class="col-md-6 ">  
+            <form role="form" action="phd/index.php" method="post" enctype="multipart/form-data">
+              <h5>Upload a previously downloaded form</h5>
+              <input type="hidden" name="type" value="upload">
+              <div class="form-group">
+                <input type="file" name="file" id="inputFile">
+              </div>
+              <input class="btn btn-primary" type="submit" name="submit" value="Upload">
+            </form>
+          </div>  <!-- col-md-6 -->
+        </div>  <!-- row well well-sm -->
+
+        <div class="row well well-sm">
+          <div class="col-md-6">
+            <h5>MS Thesis: Create a new PoS</h5>
+            <a href="ms/index.php" class="btn btn-danger">New</a><br>&nbsp;<br>
+          </div>  <!-- col-md-6 -->
+          <div class="col-md-6 ">
+            <form role="form" action="ms/index.php" method="post" enctype="multipart/form-data">
+              <h5>Upload a previously downloaded form</h5>
+              <div class="form-group">
+                <input type="hidden" name="type" value="upload">
+                <input type="file" name="file" id="inputFile">
+                <!-- <p class="help-block">Example block-level help text here.</p> -->
+              </div>
+              <input type="hidden" name="type" value="upload">
+              <input class="btn btn-danger" type="submit" name="submit" value="Upload">
+            </form>
+          </div>  <!-- col-md-6 -->
+        </div>  <!-- row well well-sm -->
+
+
+        <div class="row well well-sm">
+          <div class="col-md-6">
+            <h5>MS Coursework: Create a new PoS</h5>
+            <a href="ms/index.php?course" class="btn btn-danger">New</a>
+          </div>  <!-- col-md-6 -->
+          <div class="col-md-6 ">
+            <form role="form" action="ms/index.php" method="post" enctype="multipart/form-data">
+              <h5>Upload a previously downloaded form</h5>
+              <div class="form-group">
+                <input type="hidden" name="type" value="upload">
+                <input type="file" name="file" id="inputFile">
+                <!-- <p class="help-block">Example block-level help text here.</p> -->
+              </div>
+              <input type="hidden" name="type" value="upload">
+              <input class="btn btn-danger" type="submit" name="submit" value="Upload">
+            </form>
+          </div>  <!-- col-md-6 -->
+        </div>  <!-- row well well-sm -->
+      </div>  <!-- col-md-6 -->
+	  </div> <!-- row -->
+  </div> <!-- /container -->
+
+  <div id="footer">
     <div class="container">
-    	<div class="row">
-  		<h1>Introduction</h1>
-
-      <p>This web app allows you to prepare your Plan of Study (PoS). Please
-        read this carefully as this is a quick-and-dirty application that
-        works in particular ways and does only a few things. Hopefully it
-        does those few things well enough for you to find use and value.</p>
-
-      <p>First, this web app only lets you fill out a plan of study. It
-        does not save the plan of study, nor does it submit it for you.
-        So in a way, it is more of a smart form than an full fledge 
-        web app. There are many reasons why it does only that service,
-        but none of them are relevant here and now. This means that you
-        have to prepare your plan of study in one sitting. We strongly 
-        suggest you meet with your advisor and plan what courses you 
-        will take. Once you settle on a group of courses that make
-        sense, come here and fill out the plan of study.</p>
-
-      <p>Second, the normal way of processing a plan of study requires
-        the student printing a form and collecting signatures from 
-        his/her graduate committee
-        and submitting this form to the CS department. The details of 
-        the plan of study are then entered into a university provided 
-        system where it is then approved by the graduate program director 
-        before it is submitted (electronically) to the graduate school.  
-        This web app does not replace that process, just makes the
-        preparation of the form a bit easier.  The student still has to
-        collect signatures, and we (the department) have to enter 
-        all the information online by hand, approve it, and send it
-        to the graduate school.</p>
-
-      <p>Finally, as you fill out the form, the app does a validation
-        where a number of things are checked against the rules
-        for plans of study stated in the CS Graduate Handbook. Once
-        all of the rules are met, then you can print the plan of study,
-        collect signatures and turn in the form in the CS office. The
-        printed copy will include the output of these checks (problems 
-        and notices).
-        It is possible that your plan of study will have
-        special circumstances (e.g., transfers, approved cognates out
-        of the list of preapproved courses, new special topics) that
-        cannot be handled by the app.  In those cases, you can still
-        print out the form and submit it, it will just include some
-        checks and notices that will make it easier for the department
-        to process. Any other out of the norm situation, you can include
-        a comment in the form in the space provided.</p>
-
-      <h3>Lets get started</h3>
-      <p>Select the appropriate starting point: create a new plan of study or upload one you had already started.</p>
-
-        <div class="row">
-          <div class="col-md-3 col-md-offset-1 well well-sm">
-            <a href="phd/index.php" class="btn btn-primary">New PhD PoS</a>
-          </div>
-
-          <div class="col-md-3 col-md-offset-3 well well-sm">
-            <a href="ms/index.php" class="btn btn-danger">New MS Thesis PoS</a><br>&nbsp;<br>
-            <a href="ms/index.php?course" class="btn btn-danger">New MS Coursework PoS</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 col-md-offset-1 well well-sm">
-          <form role="form" action="phd/index.php" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="type" value="upload">
-            <div class="form-group">
-              <label for="inputFile">Upload PoS</label>
-              <input type="file" name="file" id="inputFile">
-              <!-- <p class="help-block">Example block-level help text here.</p> -->
-            </div>
-            <input class="btn btn-primary" type="submit" name="submit" value="Upload PhD PoS">
-          </form>
-
-        </div>
-
-          <div class="col-md-3 col-md-offset-3 well well-sm">
-          <form role="form" action="ms/index.php" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-            <input type="hidden" name="type" value="upload">
-              <label for="inputFile">Upload PoS</label>
-              <input type="file" name="file" id="inputFile">
-              <!-- <p class="help-block">Example block-level help text here.</p> -->
-            </div>
-            <input type="hidden" name="type" value="upload">
-            <input class="btn btn-danger" type="submit" name="submit" value="Upload MS PoS">
-          </form>
-        </div>
-      </div>
-
-      <h4>Comments?</h4>
-      <p>Send feedback and comments about this smart form to your
-        neighborhood friendly graduate director. You know his name.</p>
-
-      <br><br>
-		  </div>
-    </div> <!-- /container -->
-
-    <div id="footer">
-      <div class="container">
-        <p class="text-muted credit">CS@VT - {today}</p>
-      </div>
+      <p class="text-muted credit">CS@VT - {today}</p>
     </div>
+  </div>
 
     <!-- javascript -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

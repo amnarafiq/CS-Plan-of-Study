@@ -1,5 +1,5 @@
 <?php
-require_once("../vendor/autoload.php");
+require_once("../../vendor/autoload.php");
 require_once("../../dept_data.php");
 date_default_timezone_set('America/New_York');
 

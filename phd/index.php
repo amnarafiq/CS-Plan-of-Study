@@ -56,7 +56,27 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['type'] == "upload")) {
 		$val['coordinator'] = $coordinator;
 		$val['printed'] = date("m/d/Y");
 
-		echo gen_template("phd.tmpl", $val);
+		if ($val['degree'] == "phd")
+			echo gen_template("phd.tmpl", $val);
+		else {
+			// if the form uploaded is for another degree...
+			// we are going to force it to phd, and clear
+			// all the error messages because they were done
+			// under the wrong degree
+
+			// top_messages, seminar_messages, senior_messages, fivethousand_messages,
+			// sixthousand_messages, cognate_messages, transfer_messages, research_messages, 
+			// totalcr_messages, breadth_messages
+
+			$val['degree'] = "phd";
+			foreach(array_keys($val) as $key) {
+				if (endsWith($key, "_messages")) {
+					$val[$key] = array();
+				}
+			}
+			$val['top_messages'][] = array('message'=>"This plan of study was saved under a different degree. It might not work correctly as a PhD PoS.");
+			echo gen_template("phd.tmpl", $val);
+		}
 	}
 }
 
@@ -109,7 +129,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// normalize the select choice (faculty) options
 	if (isset($_POST['committee'])) {
 		foreach($_POST['committee'] as $k=>$v) {
-			$_POST['committee'][$k]['profname'] = ucwords(strtolower($_POST['committee'][$k]['profname']));
+			$_POST['committee'][$k]['profname'] = $_POST['committee'][$k]['profname'];
 			// $r = strtolower($_POST['committee'][$k]['role']);
 			// $_POST['committee'][$k][$r] = true;
 			// we have 4 roles (chair, co-chair, member, outside),
@@ -343,7 +363,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo gen_template("print.tmpl", $_POST);
 	else if ($_POST['submit'] == "Validate")
 		echo gen_template("phd.tmpl", $_POST);	// display
-	else {
+	else {	// Downloading form
 		// print_r($_POST);
 		// $j = json_encode($_POST, JSON_PRETTY_PRINT);
 		$j = json_encode($_POST);	//, JSON_PRETTY_PRINT);

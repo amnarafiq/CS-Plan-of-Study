@@ -1,4 +1,28 @@
 <?php
+// File: library.php
+// Description: Library of utility routines used in the Plan of Study code.
+// Author: mapq
+//
+
+// Function: endsWith
+// Description: simple string check, borrowed from stack overflow
+// Params:
+
+function endsWith($haystack, $needle)
+{
+    // search forward starting from end minus needle length characters
+    if ($needle === "")
+    	return true;
+    else {
+    	$temp = strlen($haystack) - strlen($needle);
+	    return ($temp >= 0) && (strpos($haystack, $needle, $temp) !== FALSE);
+	}
+}
+
+
+// Function: get_course_title
+// Description: Given a course number, return its title
+
 function get_course_title($area, $course)
 {
 	global $cognates, $areas, $senior;
@@ -14,12 +38,20 @@ function get_course_title($area, $course)
 		return "--";
 }
 
+// Function: normalize_course
+// Description: Normalize the course number to the format of CS4588
+// Params: $course
+
 function normalize_course($course)
 {
 	// strip anything other than letters and numbers resulting in
 	// a course in the format of CS4588
 	return strtoupper(preg_replace("/([^a-zA-Z0-9])/", "", trim($course)));
 }
+
+// Function: normalize_term
+// Description: 
+// Params:
 
 function normalize_term($term)
 {
@@ -41,6 +73,10 @@ function normalize_term($term)
 		return "";
 }
 
+// Function: valid_studentid
+// Description: 
+// Params:
+
 function valid_studentid($id)
 {
 	// strip anything other than numbers
@@ -49,6 +85,10 @@ function valid_studentid($id)
 	// strlen=9 -- must be is_numeric()
 	return (strlen($id) == 9);
 }
+
+// Function: valid_coursename
+// Description: 
+// Params:
 
 function valid_coursename($c)
 {
@@ -61,6 +101,10 @@ function valid_coursename($c)
 	$number = $match[2];
 	return (ctype_alpha($dept) && is_numeric($number));
 }
+
+// Function: valid_coursexx
+// Description: 
+// Params:
 
 function valid_coursexx($c)
 {
@@ -85,6 +129,10 @@ function valid_coursexx($c)
 		return false;
 }
 
+// Function: valid_credithours
+// Description: 
+// Params:
+
 function valid_credithours($h)
 {
 	if (is_numeric($h) && (intval($h)>0))
@@ -92,6 +140,10 @@ function valid_credithours($h)
 	else
 		return false;
 }
+
+// Function: valid_term
+// Description: 
+// Params:
 
 function valid_term($t)
 {
@@ -108,6 +160,10 @@ function valid_term($t)
 	return false;
 }
 
+// Function: valid_transfers
+// Description: 
+// Params:
+
 function valid_transfers($courses, $limit)
 {
 	$total = 0;
@@ -119,7 +175,11 @@ function valid_transfers($courses, $limit)
 	return $total <= $limit;
 }
 
-function valid_limits($courses, $min, $max)
+// Function: valid_indepedent_study_hrs
+// Description: 
+// Params:
+
+function valid_indepedent_study_hrs($courses, $min, $max)
 {
 	$total = 0;
 	foreach($courses as $course) {
@@ -128,6 +188,10 @@ function valid_limits($courses, $min, $max)
 	}
 	return $total >= $min && $total <= $max;
 }
+
+// Function: valid_research_hrs
+// Description: 
+// Params:
 
 function valid_research_hrs($courses, $min)
 {
@@ -139,6 +203,10 @@ function valid_research_hrs($courses, $min)
 	return $total >= $min;	// && $total <= $max;
 }
 
+// Function: valid_cognates
+// Description: 
+// Params:
+
 function valid_cognates($courses, $min, $max)
 {
 	$total = 0;
@@ -149,6 +217,10 @@ function valid_cognates($courses, $min, $max)
 	}
 	return $total >= $min && $total <= $max;
 }
+
+// Function: valid_cognates_courses
+// Description: 
+// Params:
 
 function valid_cognates_courses($courses)
 {
@@ -163,6 +235,10 @@ function valid_cognates_courses($courses)
 	return true;
 }
 
+// Function: valid_senior
+// Description: 
+// Params:
+
 function valid_senior($courses, $limit)
 {
 	$total = 0;
@@ -172,6 +248,10 @@ function valid_senior($courses, $limit)
 	}
 	return $total <= $limit;
 }
+
+// Function: valid_senior_course
+// Description: 
+// Params:
 
 function valid_senior_course($courses)
 {
@@ -186,6 +266,10 @@ function valid_senior_course($courses)
 	return true;
 }
 
+// Function: only_one_5974
+// Description: 
+// Params:
+
 function only_one_5974($courses)
 {
 	$totalcr = 0;
@@ -196,6 +280,10 @@ function only_one_5974($courses)
 	}
 	return $totalcr <= 3;
 }
+
+// Function: valid_sixthousand
+// Description: 
+// Params:
 
 function valid_sixthousand($courses, $min)
 {

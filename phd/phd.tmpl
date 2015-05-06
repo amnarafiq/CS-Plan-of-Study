@@ -9,9 +9,12 @@
 
 	<!-- Le styles -->
 	<style>
-	  body {
-	    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	  }
+		body {
+			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+		}
+		.modal .modal-dialog {
+			width: 80%;  /*respsonsive width*/ 
+		}
 	</style>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -35,7 +38,8 @@
 
     <div class="container">
 	    <form id="theform" name="theform" class="form-horizontal" role="form" method="POST" action="index.php">
-			<input type="hidden" id="form" value="go">
+			<input type="hidden" id="form" name="form" value="go">
+			<input type="hidden" name="degree" value="phd">
 			<h1>PhD Plan of Study</h1>
 			<div class="form-group">
 				<label for="name" class="col-sm-2 control-label">Student Name</label>
@@ -96,7 +100,7 @@
 						<p>Ph.D. students may transfer a maximum of 5 regular courses (15 credit hours). You can transfer courses taken at other universities and apply them to your plan of study. <%include transferexplanation.tmpl%></p>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#transfermodal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#transfermodal">More info on Transfering Credits...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="transfermodal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel" aria-hidden="true">
@@ -172,7 +176,7 @@
 					<td colspan="3"><h4>4000 Level Courses</h4>
 						<p>Only 1 course (3 credits) at this level can be included in a PhD plan of study. 4000 level courses cannot be used for breadth requirements. Enter the course number as CS 4xxx or CS4xxx.</p>
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#seniorModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#seniorModal">List of 4000 courses...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="seniorModal" tabindex="-1" role="dialog" aria-labelledby="seniorModalLabel" aria-hidden="true">
@@ -228,7 +232,7 @@
 						<p>You need 9 courses (27 credits) 4000 or above. If you used one 4000 above, then you need 8 courses (24 credits) of 5000 or above. Enter the course number as CS 5xxx or CS5xxx. All courses 5000 and above have a fixed breadth area, so you do not need to enter that; we will provide it.</p>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#fivethousandModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#fivethousandModal">List of 5000 level courses...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="fivethousandModal" tabindex="-1" role="dialog" aria-labelledby="fivethousandModalLabel" aria-hidden="true">
@@ -287,7 +291,7 @@
 						<p>You need at least 2 courses (6 credits) from CS 6000 level courses. These courses count for breadth requirement.</p>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#SixThousandModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#SixThousandModal">List of 6000 level courses...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="SixThousandModal" tabindex="-1" role="dialog" aria-labelledby="SixThousandModalLabel" aria-hidden="true">
@@ -341,10 +345,13 @@
 					<tr class="success">
 					<% end %>
 						<td colspan="4"><h4>Cognate Courses</h4>
-						<p>You need exactly 2 courses (6 credits) from the approved list of cognate courses. These courses do not count towards breadth requirement.</p>
+						<p>You need exactly 2 courses (6 credits) from the approved list of cognate courses. These courses do not count towards breadth requirement.
+						The list of approved cognate courses is available at
+<a href="http://www.cs.vt.edu/graduate/courses/cognates" target="_blank">http://www.cs.vt.edu/graduate/courses/cognates</a>.</p>
+
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#CognateModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#CognateModal">More info on cognates...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="CognateModal" tabindex="-1" role="dialog" aria-labelledby="CognateModalLabel" aria-hidden="true">

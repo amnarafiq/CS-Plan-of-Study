@@ -9,9 +9,12 @@
 
 	<!-- Le styles -->
 	<style>
-	  body {
-	    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	  }
+		body {
+			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+		}
+		.modal .modal-dialog {
+			width: 80%;  /*respsonsive width*/ 
+		}
 	</style>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -46,6 +49,7 @@
 
 	    <form id="theform" name="theform" class="form-horizontal" role="form" 
 	    	method="POST" action="index.php">
+			<input type="hidden" name="degree" value="ms">
 			<input type="hidden" name="msthesis" value="{msthesis}">
 			<input type="hidden" name="mscoursework" value="{mscoursework}">
 			<h1>MS <% if {msthesis} %>Thesis<%else%>Coursework<%end%> Plan of Study</h1>
@@ -115,7 +119,7 @@
 						<p>MS students may transfer a maximum of 3 regular courses (9 credit hours). You can transfer courses taken at other universities and apply them to your plan of study. <%include transferexplanation.tmpl%></p>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#transfermodal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#transfermodal">More info on Transfering Credits...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="transfermodal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel" aria-hidden="true">
@@ -191,7 +195,7 @@
 					<td colspan="3"><h4>4000 Level Courses</h4>
 						<p>Only 1 course (3 credits) at this level can be included in an MS plan of study. 4000 level courses cannot be used for breadth requirements. Enter the course number as CS 4xxx or CS4xxx.</p>
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#seniorModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#seniorModal">List of 4000 courses...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="seniorModal" tabindex="-1" role="dialog" aria-labelledby="seniorModalLabel" aria-hidden="true">
@@ -251,7 +255,7 @@
 <% end %>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#fivethousandModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#fivethousandModal">List of 5000 level courses...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="fivethousandModal" tabindex="-1" role="dialog" aria-labelledby="fivethousandModalLabel" aria-hidden="true">
@@ -310,7 +314,7 @@
 						<p>You need at least 1 course (3 credits) from CS 6000 level courses. This course will count for breadth requirement.</p>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#SixThousandModal">More info...</button>
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#SixThousandModal">List of 6000 level courses...</button>
 
 <!-- Modal -->
 <div class="modal fade" id="SixThousandModal" tabindex="-1" role="dialog" aria-labelledby="SixThousandModalLabel" aria-hidden="true">

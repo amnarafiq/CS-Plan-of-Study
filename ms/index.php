@@ -58,7 +58,26 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_POST['type'] == "upload")) {
 		$val['depthead'] = $depthead;
 		$val['coordinator'] = $coordinator;
 		$val['printed'] = date("m/d/Y");
-		echo gen_template("ms.tmpl", $val);
+
+
+		if ($val['degree'] == "ms")
+			echo gen_template("ms.tmpl", $val);
+		else {
+			// if the form uploaded is for another degree...
+			// we are going to force it to phd, and clear
+			// all the error messages because they were done
+			// under the wrong degree
+
+			$val['degree'] = "ms";
+			foreach(array_keys($val) as $key) {
+				// Messages are stored in *_messages, clear them all
+				if (endsWith($key, "_messages")) {
+					$val[$key] = array();
+				}
+			}
+			$val['top_messages'][] = array('message'=>"This plan of study was saved under a different degree. It might not work correctly as an MS PoS.");
+			echo gen_template("ms.tmpl", $val);
+		}
 	}
 	else {
 		$val = array();
@@ -142,7 +161,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// normalize the select choice (faculty) options
 	if (isset($_POST['committee'])) {
 		foreach($_POST['committee'] as $k=>$v) {
-			$_POST['committee'][$k]['profname'] = ucwords(strtolower($_POST['committee'][$k]['profname']));
+			$_POST['committee'][$k]['profname'] = $_POST['committee'][$k]['profname'];
 			// $r = strtolower($_POST['committee'][$k]['role']);
 			// $_POST['committee'][$k][$r] = true;
 			// we have 4 roles (chair, co-chair, member, outside),
@@ -181,6 +200,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			}
 		}
 	}
+
 	// Process ['transfer'] separately... the value of the area is coming back from
 	// the HTML directly in an index to areatitles
 	if (isset($_POST['transfer'])) {
@@ -197,6 +217,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$totalcr += $_POST['transfer'][$k]['credits'];
 		}
 	}
+
 	// Process ['research'] credits separately
 	if (isset($_POST['research'])) {
 		$research_hours = 0;
@@ -209,8 +230,11 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				'breadth' => -1);
 			 $research_hours += $_POST['research'][$k]['credits'];
 		}
+
+		// only count max towards degree
 		if ($research_hours > RESEARCH_MAX_CR)
-			$research_hours = RESEARCH_MAX_CR;		// only this max will count towards degree
+			$research_hours = RESEARCH_MAX_CR;
+
 		$totalcr += $research_hours;
 	}
 	// add seminars to courses here... @@ why? so we can print them later?
@@ -220,7 +244,6 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	// print_r($courses);
 
 	// Error check and messages
-	// $_POST['messages'] = array();
 
 	if (strlen(trim($_POST['name'])) == 0)
 		$_POST['top_messages'][] = array('message'=>"Please enter your full name.");
@@ -309,7 +332,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$_POST['research_messages'][] = array('message'=>"You need at least ".RESEARCH_MIN_CR." credits of ".RESEARCH_COURSE." to satisfy the ".DEGREE_NAME." degree requirements.");
 	}
 	else {
-		if (!valid_limits($courses, IND_STUDY_MIN_CR, IND_STUDY_MAX_CR))
+		if (!valid_indepedent_study_hrs($courses, IND_STUDY_MIN_CR, IND_STUDY_MAX_CR))
 			$_POST['research_messages'][] = array('message'=>"You can only use between ".IND_STUDY_MIN_CR." and ".IND_STUDY_MAX_CR." credits of Independent Study to satisfy the ".DEGREE_NAME." degree requirements.");
 	}
 
@@ -379,7 +402,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$_POST['coordinator'] = $coordinator;
 	$_POST['printed'] = date("m/d/Y");
 
-	// We end by generating either a print or the same page
+	// Now generate the filled out form (with messages), a printed page, or dowload
 	// print_r($_POST);
 	if ($_POST['submit'] == "Print") {
 		$_POST['comments'] = nl2br($_POST['comments']);
